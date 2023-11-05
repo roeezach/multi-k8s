@@ -39,10 +39,7 @@ jobs:
 
       - name: Install EB CLI
         run: |
-          pip install --upgrade pip
-          pip install awsebcli
-        env:
-          PATH: ${{ runner.tool_cache }}/python/${{ runner.python.default }}/x64:$PATH
+          sudo apt-get install awsebcli
 
       - name: Deploy to Elastic Beanstalk
         run: |
