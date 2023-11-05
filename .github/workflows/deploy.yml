@@ -42,11 +42,11 @@ jobs:
           pip install --upgrade pip
           pip install awsebcli
         env:
-          PATH: ${{ runner.toolsDirectory }}/python/3.9.7/x64:$PATH
+          PATH: ${{ runner.tool_cache }}/python/${{ runner.python.default }}/x64:$PATH
 
       - name: Deploy to Elastic Beanstalk
         run: |
-          aws configure set region eu-north-1  # Update with your desired region
+          aws configure set region eu-north-1
           aws configure set aws_access_key ${{ secrets.AWS_ACCESS_KEY }}
           aws configure set aws_secret_key ${{ secrets.AWS_SECRET_KEY }}
           eb deploy --debug
