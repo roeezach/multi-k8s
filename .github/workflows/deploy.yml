@@ -39,7 +39,11 @@ jobs:
 
       - name: Install EB CLI
         run: |
-          sudo apt-get install awsebcli
+          wget https://d1vvhvl2y92vvt.cloudfront.net/aws-elasticbeanstalk-cli-setup-v3.21.5.tar.gz -O ebcli.tar.gz
+          tar -xvf ebcli.tar.gz
+          sudo bash ./ebcli-bundle/install
+        env:
+          PATH: ${{ runner.workspace }}/ebcli-bundle/bin:$PATH
 
       - name: Deploy to Elastic Beanstalk
         run: |
