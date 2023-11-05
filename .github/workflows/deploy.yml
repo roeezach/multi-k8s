@@ -39,11 +39,11 @@ jobs:
 
       - name: Install EB CLI
         run: |
-          wget https://d1vvhvl2y92vvt.cloudfront.net/aws-elasticbeanstalk-cli-setup-v3.21.5.tar.gz -O ebcli.tar.gz
-          tar -xvf ebcli.tar.gz
-          sudo bash ./ebcli-bundle/install
+          sudo apt-get install python3.9
+          pip install --upgrade pip
+          pip install awsebcli
         env:
-          PATH: ${{ runner.workspace }}/ebcli-bundle/bin:$PATH
+          PATH: ${{ runner.tool_cache }}/python/${{ runner.python.default }}/x64:$PATH
 
       - name: Deploy to Elastic Beanstalk
         run: |
