@@ -12,6 +12,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install Python 3.9
+        run: |
+          sudo apt-get update
+          sudo apt-get install python3.9
+        shell: bash
+
+      - name: Install pip
+        run: |
+          sudo apt-get install python3-pip
+        shell: bash
+
+      - name: Install EB CLI
+        run: |
+          pip3 install --upgrade pip
+          pip3 install awsebcli
+        shell: bash
+        env:
+          PATH: ${{ runner.workspace }}/.local/bin:$PATH
+
       - name: Build and test client react app
         run: |
           docker build -t roeezach/react-test -f ./client/Dockerfile.dev ./client
@@ -36,14 +55,6 @@ jobs:
           docker push roeezach/multi-server
           docker push roeezach/multi-worker
         working-directory: ${{ github.workspace }}
-
-      - name: Install EB CLI
-        run: |
-          sudo apt-get install python3.9
-          pip install --upgrade pip
-          pip install awsebcli
-        env:
-          PATH: ${{ runner.tool_cache }}/python/${{ runner.python.default }}/x64:$PATH
 
       - name: Deploy to Elastic Beanstalk
         run: |
