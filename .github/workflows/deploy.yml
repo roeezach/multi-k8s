@@ -37,6 +37,13 @@ jobs:
           docker push roeezach/multi-worker
         working-directory: ${{ github.workspace }}
 
+      - name: Install EB CLI
+        run: |
+          pip install --upgrade pip
+          pip install awsebcli
+        env:
+          PATH: ${{ runner.toolsDirectory }}/python/3.9.7/x64:$PATH
+
       - name: Deploy to Elastic Beanstalk
         run: |
           aws configure set region eu-north-1  # Update with your desired region
