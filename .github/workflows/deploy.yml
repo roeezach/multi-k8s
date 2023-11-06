@@ -44,5 +44,5 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
           region: "eu-north-1"
           app_name: "multi-docker"
-          environment_name: "MultiDocker-env"
+          environment_name: "Multi-docker-env"
           version_label: ${{ github.sha }}
