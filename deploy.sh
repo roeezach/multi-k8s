@@ -1,12 +1,15 @@
 docker build -t roeezach/multi-client:latest -t roeezach/multi-client:$SHA -f ./client/Dockerfile ./client
 docker build -t roeezach/multi-server:latest -t roeezach/multi-server:$SHA -f ./server/Dockerfile ./server
 docker build -t roeezach/multi-worker:latest -t roeezach/multi-worker:$SHA -f ./worker/Dockerfile ./worker
+
 docker push roeezach/multi-client:latest
 docker push roeezach/multi-server:latest
 docker push roeezach/multi-worker:latest
+
 docker push roeezach/multi-client:$SHA
 docker push roeezach/multi-server:$SHA
 docker push roeezach/multi-worker:$SHA
+
 kubectl apply -f k8s
 kubectl set image deployments/server-deployment server=roeezach/multi-server:$SHA
 kubectl set image deployments/client-deployment server=roeezach/multi-client:$SHA
