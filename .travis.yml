@@ -7,16 +7,16 @@ env:
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 before_install:
   - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
-  - sudo apt-get update
-  - sudo apt-get install -y software-properties-common
-  - sudo add-apt-repository -y ppa:deadsnakes/ppa
-  - sudo apt-get update
-  - sudo apt-get install -y python3.8
-  - sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
+  - curl https://pyenv.run | bash
+  - export PATH="$HOME/.pyenv/bin:$PATH"
+  - eval "$(pyenv init --path)"
+  - eval "$(pyenv virtualenv-init -)"
+  - pyenv install 3.8.13
+  - pyenv global 3.8.13
+  - python --version
   - curl https://sdk.cloud.google.com | CLOUDSDK_PYTHON=python3.8 bash > /dev/null
   - source $HOME/google-cloud-sdk/path.bash.inc
   - export PATH=$PATH:$HOME/google-cloud-sdk/bin
-  - pyenv global 3.8
   - gcloud components update kubectl
   - gcloud auth activate-service-account --key-file service-account.json
   - gcloud config set project named-dialect-404616
