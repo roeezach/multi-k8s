@@ -20,7 +20,7 @@ before_install:
   - export PATH=$PATH:$HOME/google-cloud-sdk/bin
   - gcloud components update kubectl
   - gcloud auth activate-service-account --key-file service-account.json
-  - gcloud config set project named-dialect-404616
+  - gcloud config set project multi-k8s-404616
   - gcloud config set compute/zone europe-west6-a
   - gcloud container clusters get-credentials multi-cluster
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
