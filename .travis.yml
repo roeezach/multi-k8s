@@ -10,7 +10,7 @@ before_install:
   - curl https://sdk.cloud.google.com | CLOUDSDK_PYTHON=python3.8 bash > /dev/null
   - source $HOME/google-cloud-sdk/path.bash.inc
   - export PATH=$PATH:$HOME/google-cloud-sdk/bin
-    - pyenv global 3.8
+  - pyenv global 3.8
   - gcloud components update kubectl
   - gcloud auth activate-service-account --key-file service-account.json
   - gcloud config set project named-dialect-404616
